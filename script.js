@@ -1,6 +1,6 @@
 // Helper function: replaces content inside #out
-function render (html) {
-  document.getElementById('out').innerHTML = html
+function render(html) {
+   document.getElementById('out').innerHTML = html
 }
 
 /* -------------------------------
@@ -8,16 +8,34 @@ function render (html) {
 -------------------------------- */
 let clickCount = 0
 
+document.getElementById('btnClick').addEventListener('click', () => {
+   clickCount++
+   render(
+      `<p>You clicked the button! It's been clicked ${clickCount} time${clickCount === 1 ? '' : 's'}.</p>`
+   )
+})
+
 
 /* --------------------------------------
    Demo 2: Double-click (toggle highlight)
 --------------------------------------- */
-
+const dblCard = document.getElementById('dblCard') //THE CARD TO TOGGLE
+dblCard.addEventListener('dblclick', () => {
+   dblCard.classList.toggle('activated')
+   const state = dblCard.classList.contains('activated') ? 'ON' : 'OFF'
+   render(`<p>The highlight is <strong>${state}</strong>.</p>`)
+})
 
 /* --------------------------------
    Demo 3: Keypress (show key/code)
 --------------------------------- */
+const kbKey = document.getElementById('kbKey')
+const kbCode = document.getElementById('kbCode')
 
+document.addEventListener('keydown', (e) => {
+   kbKey.textContent = e.key === ' ' ? '(space)' : e.key
+   kbCode.textContent = e.code
+})
 
 /* ----------------------------------------
    Demo 4: Show Time (12-hour format + day)
@@ -28,7 +46,7 @@ let clickCount = 0
    Utility: Clear output
 -------------------------- */
 document.getElementById('btnClear').addEventListener('click', () => {
-  render('<span class="text-secondary">Output cleared.</span>')
+   render('<span class="text-secondary">Output cleared.</span>')
 })
 
 /* =================================================
@@ -55,3 +73,8 @@ document.getElementById('btnClear').addEventListener('click', () => {
    - On focus: add a border/shadow class to the input
    - On blur: remove those classes and make sure #out shows the right message
 ================================================== */
+
+
+//OPTION B
+
+//OPTION c
