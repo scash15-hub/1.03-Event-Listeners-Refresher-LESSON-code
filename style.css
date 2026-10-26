@@ -18,6 +18,11 @@ header{
   background:linear-gradient(120deg,var(--bs-primary),var(--bs-secondary));
 }
 
+.scroll-progress{
+  height:.25rem;
+  z-index:1031;
+}
+
 /* Output box */
 #out{
   min-height:8rem;

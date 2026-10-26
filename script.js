@@ -77,4 +77,48 @@ document.getElementById('btnClear').addEventListener('click', () => {
 
 //OPTION B
 
-//OPTION c
+const scrollProgressBar = document.getElementById('scrollProgressBar')
+const scrollProgress = scrollProgressBar.parentElement
+
+function updateScrollProgress() {
+   const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
+   const progress = scrollableHeight > 0
+      ? Math.min(100, Math.max(0, (window.scrollY / scrollableHeight) * 100))
+      : 0
+
+   scrollProgressBar.style.width = `${progress}%`
+   scrollProgress.setAttribute('aria-valuenow', `${Math.round(progress)}`)
+}
+
+updateScrollProgress()
+window.addEventListener('scroll', updateScrollProgress)
+
+
+//OPTION C
+const inputMirror = document.getElementById('inputMirror')
+
+inputMirror.addEventListener('input', e => {
+  const value = e.target.value
+  if (value) {
+    render(`<p>You typed: <strong>${value}</strong></p>`)
+  } else {
+    render('<p class="text-secondary">Type something in the input above.</p>')
+  }
+})
+
+// When the input is focused
+inputMirror.addEventListener('focus', () => {
+  inputMirror.classList.add('border', 'shadow')
+})
+
+// When the input loses focus
+inputMirror.addEventListener('blur', () => {
+  inputMirror.classList.remove('border', 'shadow')
+
+  const value = inputMirror.value
+  if (value) {
+    render(`<p>You typed: <strong>${value}</strong></p>`)
+  } else {
+    render('<p class="text-secondary">Type something in the input above.</p>')
+  }
+})
